@@ -1,0 +1,26 @@
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Item : MonoBehaviour
+{
+    [SerializeField] private Image _image;
+    [SerializeField] private RectTransform _rectTransform;
+    public int Id { get; private set; }
+
+    public void Init(int id, Sprite sprite, Vector2 size)
+    {
+        Id = id;
+        _image.sprite = sprite;
+        _rectTransform.sizeDelta = size;
+    }
+    
+    public void Move(Slot slot)
+    {
+        transform.DOMove(slot.transform.position, 0.1f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            transform.SetParent(slot.transform);
+            slot.SetItem(this);
+        });
+    }
+}
