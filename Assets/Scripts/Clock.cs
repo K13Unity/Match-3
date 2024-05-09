@@ -12,13 +12,35 @@ public class Clock : MonoBehaviour
     void Update()
     {
         StartTimer();
+        ClickMous();
     }
     private void StartTimer()
     {
-        if (_maxScore > _score)
+        if (_maxScore >= _score)
         {
             _score += 1;
             _progressBar.fillAmount = _score / _maxScore;
+        }
+        else
+        {
+            // Час вийшов
+        }
+    }
+
+    public void AddTime(int time)
+    {
+        if(_score >= 0)
+        {
+            _score -= time;
+        }
+        
+    }
+
+    private void ClickMous()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            AddTime(200);
         }
     }
 }

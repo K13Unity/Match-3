@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private RectTransform _rectTransform;
+    
     private Vector3 _startDragPoint;
     private Vector3 _endDragPoint;
 
@@ -51,5 +52,6 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public void SetItem(Item item)
     {
         this.item = item;
+        item.SetSlotPosition(this);
     }
 }
