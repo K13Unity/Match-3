@@ -12,7 +12,6 @@ public class ComboProgressBar : MonoBehaviour
     void Update()
     {
         ComboProgress();
-        ClickMous();
     }
 
     private void ComboProgress()
@@ -41,13 +40,5 @@ public class ComboProgressBar : MonoBehaviour
             return;
         }
         _currentComboPoints += points;
-    }
-
-    private void ClickMous()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            AddComboPoints(400);
-        }
     }
 }

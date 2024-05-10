@@ -12,7 +12,6 @@ public class Clock : MonoBehaviour
     void Update()
     {
         StartTimer();
-        ClickMous();
     }
     private void StartTimer()
     {
@@ -34,13 +33,5 @@ public class Clock : MonoBehaviour
             _score -= time;
         }
         
-    }
-
-    private void ClickMous()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            AddTime(200);
-        }
     }
 }

@@ -4,14 +4,18 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private ProgressSlotManager _progressSlotManager;
     [SerializeField] private ComboItemManager _comboItemManager;
+    [SerializeField] private CheckMatches _checkMatches;
     [SerializeField] private SlotManager _slotManager;
 
     [SerializeField] private RectTransform _progressZone;
     [SerializeField] private RectTransform _playZone;
 
+    [SerializeField] private Clock _clock;
+    [SerializeField] private ComboProgressBar _comboProgressBar;
+
 
     private int _heightProgressCount = 15;
-    public const int _slotCount = 8;
+    public const int slotCount = 8;
 
     private Vector2 _slotSize;
     private Vector2 _progressSlotSize;
@@ -21,23 +25,24 @@ public class GameController : MonoBehaviour
     {
         _slotSize = CalculateSlotSize();
         _progressSlotSize = CalculateProgressSlotSize();
-        _slotManager.CreateSlots(_slotCount, _slotCount, _slotSize);
+        _slotManager.SetMatchChecker(_checkMatches);
         _progressSlotManager.CreateProgressSlots(_heightProgressCount, _progressSlotSize);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _comboItemManager.CreateComboItem();
-        }
+        if (Input.GetKeyDown(KeyCode.Space)) _comboItemManager.CreateComboItem();
+        if (Input.GetKeyDown(KeyCode.A)) _slotManager.CreateSlots(slotCount, slotCount, _slotSize);
+        if (Input.GetKeyDown(KeyCode.C)) _checkMatches.CheckGrid();
+        if (Input.GetKeyDown(KeyCode.D)) _clock.AddTime(200);
+        if (Input.GetKeyDown(KeyCode.S)) _comboProgressBar.AddComboPoints(400);
     }
 
     private Vector2 CalculateSlotSize()
     {
         Vector2 zoneSize = _playZone.rect.size;
-        float slotWidth = zoneSize.x / _slotCount;
-        float slotHeight = zoneSize.y / _slotCount;
+        float slotWidth = zoneSize.x / slotCount;
+        float slotHeight = zoneSize.y / slotCount;
         return new Vector2(slotWidth, slotHeight);
     }
 

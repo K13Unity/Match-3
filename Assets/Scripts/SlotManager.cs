@@ -1,24 +1,27 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SlotManager : MonoBehaviour
 {
     [SerializeField] private ItemsSpritsConfig _itemsSpritsConfig;
+    [SerializeField] private SlotManager _slotManager;
     [SerializeField] private RectTransform _playZone;
     [SerializeField] private Slot _slotPrefab;
     [SerializeField] private Item _itemPrefab;
 
+    private IMatchChecker _matchChecker;
 
-    public const int _slotCount = 8;
     private Vector2 _slotSize;
-    Slot[,] slots = new Slot[_slotCount, _slotCount];
+    Slot[,] slots = new Slot[GameController.slotCount, GameController.slotCount];
     public Slot[,] Slots
     {
         get { return slots; }
         set { slots = value; }
     }
 
+    public void SetMatchChecker(IMatchChecker matchChecker)
+    {
+        _matchChecker = matchChecker;
+    }
 
 
     public void CreateSlots(int rowCount, int colCount, Vector2 slotSize)
@@ -54,68 +57,19 @@ public class SlotManager : MonoBehaviour
     private void OnHorizontalSwap(Slot slot, int direction)
     {
         var x = slot.xPos + direction;
-        if (x < 0 || x >= _slotCount) return;
+        if (x < 0 || x >= GameController.slotCount) return;
 
         var targetSlot = slots[slot.yPos, x];
         slot.item.Move(targetSlot);
-        targetSlot.item.Move(slot, () => CheckGrid(slot));
+        targetSlot.item.Move(slot, () => _matchChecker.CheckGrid());
     }
 
     private void OnVerticalSwap(Slot slot, int direction)
     {
         var y = slot.yPos + direction;
-        if (y < 0 || y >= _slotCount) return;
+        if (y < 0 || y >= GameController.slotCount) return;
         var targetSlot = slots[y, slot.xPos];
         slot.item.Move(targetSlot);
-        targetSlot.item.Move(slot,() => CheckGrid(slot));
-    }
-
-    public void CheckGrid(Slot slot)
-    {
-        var id = slot.item.Id;
-
-        List<Slot> slots = new List<Slot>();
-        slots.Add(slot);
-        if (slot.xPos - 1 >= 0)
-        {
-            var prevSlot = Slots[slot.xPos - 1, slot.yPos];
-            Debug.Log(prevSlot.yPos +"" + prevSlot.xPos);
-            if(prevSlot.item.Id == id)
-            {
-                slots.Add(prevSlot);
-                if(slot.xPos - 2 >= 0)
-                {
-                    var prevPrevSlot = Slots[slot.xPos - 2, slot.yPos];
-                    Debug.Log(prevPrevSlot.yPos + "" + prevPrevSlot.xPos);
-                    if (prevPrevSlot.item.Id == id)
-                    {
-                        slots.Add(prevPrevSlot);
-                    }
-                }
-            }
-        }
-        if (slot.xPos + 1 < _slotCount)
-        {
-            var nextSlot = Slots[slot.xPos + 1, slot.yPos];
-            if(nextSlot.item.Id == id)
-            {
-                slots.Add(nextSlot);
-                if(slot.xPos + 2 < _slotCount)
-                {
-                    var nextNextSlot = Slots[slot.xPos + 2, slot.yPos];
-                    if(nextNextSlot.item.Id == id)
-                    {
-                        slots.Add(nextNextSlot);
-                    }
-                }
-            }
-        }
-        if(slots.Count >= 3)
-        {
-            foreach (var s in slots)
-            {
-                Debug.Log(slot.yPos + ", " + slot.xPos + " cleared!");
-            }
-        }
+        targetSlot.item.Move(slot, () => _matchChecker.CheckGrid());
     }
 }
