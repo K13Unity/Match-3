@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         _slotSize = CalculateSlotSize();
+        _slotManager.CreateSlots(slotCount, slotCount, _slotSize);
         _progressSlotSize = CalculateProgressSlotSize();
         _slotManager.SetMatchChecker(_checkMatches);
         _progressSlotManager.CreateProgressSlots(_heightProgressCount, _progressSlotSize);
@@ -32,10 +33,10 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) _comboItemManager.CreateComboItem();
-        if (Input.GetKeyDown(KeyCode.A)) _slotManager.CreateSlots(slotCount, slotCount, _slotSize);
         if (Input.GetKeyDown(KeyCode.C)) _checkMatches.CheckGrid();
         if (Input.GetKeyDown(KeyCode.D)) _clock.AddTime(200);
         if (Input.GetKeyDown(KeyCode.S)) _comboProgressBar.AddComboPoints(400);
+        if (Input.GetKeyDown(KeyCode.A)) _slotManager.RefillSlots();
     }
 
     private Vector2 CalculateSlotSize()

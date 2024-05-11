@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.76862746}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1094,7 +1094,7 @@ GameObject:
   - component: {fileID: 853186748}
   - component: {fileID: 853186750}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1630,6 +1630,8 @@ MonoBehaviour:
   _slotManager: {fileID: 153434506}
   _progressZone: {fileID: 1568886935}
   _playZone: {fileID: 294194019}
+  _clock: {fileID: 853186750}
+  _comboProgressBar: {fileID: 1468187477}
 --- !u!4 &1144914542
 Transform:
   m_ObjectHideFlags: 0

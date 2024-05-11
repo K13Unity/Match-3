@@ -3,7 +3,6 @@ using UnityEngine;
 public class SlotManager : MonoBehaviour
 {
     [SerializeField] private ItemsSpritsConfig _itemsSpritsConfig;
-    [SerializeField] private SlotManager _slotManager;
     [SerializeField] private RectTransform _playZone;
     [SerializeField] private Slot _slotPrefab;
     [SerializeField] private Item _itemPrefab;
@@ -46,7 +45,43 @@ public class SlotManager : MonoBehaviour
 
     private void CreateItem(Slot slot)
     {
-        var id = Random.Range(0, _itemsSpritsConfig.ItemsSprites.Count);
+
+        int id;
+        bool matchFound;
+        do
+        {
+            matchFound = false;
+            id = Random.Range(0, _itemsSpritsConfig.ItemsSprites.Count);
+
+            if (slot.xPos >= 2)
+            {
+                if (slots[slot.yPos, slot.xPos - 1].item.Id == id &&
+                    slots[slot.yPos, slot.xPos - 2].item.Id == id)
+                {
+                    matchFound = true;
+                }
+            }
+
+            if (slot.yPos >= 2)
+            {
+                if (slots[slot.yPos - 1, slot.xPos].item.Id == id &&
+                    slots[slot.yPos - 2, slot.xPos].item.Id == id)
+                {
+                    matchFound = true;
+                }
+            }
+        } while (matchFound);
+        Item item = Instantiate(_itemPrefab);
+        item.Init(id, _itemsSpritsConfig.ItemsSprites[id], _slotSize);
+        item.transform.SetParent(slot.transform);
+        item.transform.localPosition = Vector3.zero;
+        slot.SetItem(item);
+    }
+
+    private void AddingNewItems(Slot slot)
+    {
+        int id;
+        id = Random.Range(0, _itemsSpritsConfig.ItemsSprites.Count);
         Item item = Instantiate(_itemPrefab);
         item.Init(id, _itemsSpritsConfig.ItemsSprites[id], _slotSize);
         item.transform.SetParent(slot.transform);
@@ -61,7 +96,9 @@ public class SlotManager : MonoBehaviour
 
         var targetSlot = slots[slot.yPos, x];
         slot.item.Move(targetSlot);
-        targetSlot.item.Move(slot, () => _matchChecker.CheckGrid());
+        targetSlot.item.Move(slot, () => {
+            _matchChecker.CheckGrid();
+        });
     }
 
     private void OnVerticalSwap(Slot slot, int direction)
@@ -70,6 +107,37 @@ public class SlotManager : MonoBehaviour
         if (y < 0 || y >= GameController.slotCount) return;
         var targetSlot = slots[y, slot.xPos];
         slot.item.Move(targetSlot);
-        targetSlot.item.Move(slot, () => _matchChecker.CheckGrid());
+        targetSlot.item.Move(slot, () => {
+           _matchChecker.CheckGrid();
+        });
+    }
+
+    public void RefillSlots()
+    {
+        Debug.Log("RefillSlots");
+        for (int x = 0; x < GameController.slotCount; x++)
+        {
+            int emptyCount = 0;
+            for (int y = 0; y < GameController.slotCount; y++)
+            {
+                if (slots[y, x].item == null)
+                {
+                    emptyCount++;
+                    
+                }
+                else if (emptyCount > 0)
+                {
+                    slots[y - emptyCount, x].SetItem(slots[y, x].item);
+                    slots[y, x].SetItem(null);
+                    y -= emptyCount;
+                    emptyCount = 0;
+                }
+            }
+
+            for (int y = 0; y < emptyCount; y++)
+            {
+                AddingNewItems(slots[GameController.slotCount - 1 - y, x]);
+            }
+        }
     }
 }

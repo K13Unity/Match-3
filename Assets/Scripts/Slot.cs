@@ -1,4 +1,5 @@
 using System;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,9 +10,9 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Vector3 _startDragPoint;
     private Vector3 _endDragPoint;
 
-    public int xPos { get; private set;}
-    public int yPos { get; private set;}
-    public Item item { get; private set;}
+    public int xPos;
+    public int yPos;
+    public Item item;
 
     public event Action <Slot, int> onHorisontal;
     public event Action <Slot, int> onVertical;
@@ -52,6 +53,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public void SetItem(Item item)
     {
         this.item = item;
-        item.SetSlotPosition(this);
+        if (item != null) item.SetSlotPosition(this);
+
     }
 }

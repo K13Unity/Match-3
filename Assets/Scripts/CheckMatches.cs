@@ -6,20 +6,33 @@ public class CheckMatches : MonoBehaviour, IMatchChecker
     [SerializeField] private SlotManager _slotManager;
 
 
-
     public void CheckGrid()
     {
-        Debug.Log("CheckGrid");
-        CheckHorizontalLines();
-        CheckVerticalLines();
+        List<Slot> toBeBurned = CheckVerticalLines();
+        if (toBeBurned.Count > 0)
+        {
+            BurnItems(toBeBurned);
+            _slotManager.RefillSlots();
+            CheckGrid();
+            return;
+        }
+
+        List<Slot> toBeBurnedHor = CheckHorizontalLines();
+        if (toBeBurnedHor.Count > 0)
+        {
+            BurnItems(toBeBurnedHor);
+            _slotManager.RefillSlots();
+            CheckGrid();
+            return;
+        }
     }
 
-    private void CheckHorizontalLines()
+    private List<Slot> CheckHorizontalLines()
     {
         for (int row = 0; row < GameController.slotCount; row++)
         {
             int consecutiveCount = 1;
-            List<Item> toBeBurned = new List<Item>();
+            List<Slot> toBeBurned = new List<Slot>();
 
             for (int col = 1; col < GameController.slotCount; col++)
             {
@@ -27,34 +40,33 @@ public class CheckMatches : MonoBehaviour, IMatchChecker
                 {
                     if (consecutiveCount == 1)
                     {
-                        toBeBurned.Add(_slotManager.Slots[row, col - 1].item);
+                        toBeBurned.Add(_slotManager.Slots[row, col - 1]);
                     }
-                    toBeBurned.Add(_slotManager.Slots[row, col].item);
+                    toBeBurned.Add(_slotManager.Slots[row, col]);
                     consecutiveCount++;
                 }
                 else
                 {
-                    if (consecutiveCount >= 3)
+                    if (toBeBurned.Count >= 3)
                     {
-                        BurnItems(toBeBurned);
+                        return toBeBurned;
                     }
+                    //ProcessBurnItems(consecutiveCount, toBeBurned);
                     consecutiveCount = 1;
                     toBeBurned.Clear();
                 }
             }
-            if (consecutiveCount >= 3)
-            {
-                BurnItems(toBeBurned);
-            }
+            //ProcessBurnItems(consecutiveCount, toBeBurned);
         }
+        return new List<Slot>();
     }
 
-    private void CheckVerticalLines()
+    private List<Slot> CheckVerticalLines()
     {
         for (int col = 0; col < GameController.slotCount; col++)
         {
             int consecutiveCount = 1;
-            List<Item> toBeBurned = new List<Item>();
+            List<Slot> toBeBurned = new List<Slot>();
 
             for (int row = 1; row < GameController.slotCount; row++)
             {
@@ -62,33 +74,42 @@ public class CheckMatches : MonoBehaviour, IMatchChecker
                 {
                     if (consecutiveCount == 1)
                     {
-                        toBeBurned.Add(_slotManager.Slots[row - 1, col].item);
+                        toBeBurned.Add(_slotManager.Slots[row - 1, col]);
                     }
-                    toBeBurned.Add(_slotManager.Slots[row, col].item);
+                    toBeBurned.Add(_slotManager.Slots[row, col]);
                     consecutiveCount++;
                 }
                 else
                 {
-                    if (consecutiveCount >= 3)
+                    if(toBeBurned.Count >= 3)
                     {
-                        BurnItems(toBeBurned);
+                        return toBeBurned;
                     }
+                   // ProcessBurnItems(consecutiveCount, toBeBurned);
                     consecutiveCount = 1;
                     toBeBurned.Clear();
                 }
+
             }
-            if (consecutiveCount >= 3)
-            {
-                BurnItems(toBeBurned);
-            }
+            //ProcessBurnItems(consecutiveCount, toBeBurned);
+        }
+        return new List<Slot>();
+    }
+
+    private void ProcessBurnItems(int consecutiveCount, List<Slot> toBeBurned)
+    {
+        if (consecutiveCount >= 3)
+        {
+            BurnItems(toBeBurned);
         }
     }
 
-    private void BurnItems(List<Item> items)
+    private void BurnItems(List<Slot> slots)
     {
-        foreach (var item in items)
+        foreach (var slot in slots)
         {
-            Destroy(item.gameObject);
+            Destroy(slot.item.gameObject);
+            slot.item = null;
         }
     }
 }

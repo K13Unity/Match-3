@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
     
     public void Move(Slot slot, Action action = null)
     {
-        transform.DOMove(slot.transform.position, 0.1f).SetEase(Ease.Linear).OnComplete(() =>
+        transform.DOMove(slot.transform.position, 1f).SetEase(Ease.Linear).OnComplete(() =>
         {
             transform.SetParent(slot.transform);
             slot.SetItem(this);
@@ -31,6 +31,10 @@ public class Item : MonoBehaviour
 
     public void SetSlotPosition(Slot slot)
     {
-        _text.text = $"{slot.xPos}{slot.yPos}";
+        transform.SetParent(slot.transform);
+        transform.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one;
+        transform.localRotation = Quaternion.identity;
+        _text.text = $"{slot.yPos}{slot.xPos}";
     }
 }
