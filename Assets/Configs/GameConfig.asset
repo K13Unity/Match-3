@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28aec163c8cccd345affcd331f9495dc, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  _slotPrefab: {fileID: 1811208148943761803, guid: d1f9acd90b755c74d841a1d0915e4d9a, type: 3}
+  _itemPrefab: {fileID: 3211151565032282773, guid: 5f987843fafe6be4cb1f99c3786d9e6d, type: 3}
+  _itemsSpritsConfig: {fileID: 11400000, guid: 5c1db6fb865e8ba47a7a6f6113750557, type: 2}

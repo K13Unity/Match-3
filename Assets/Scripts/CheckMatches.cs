@@ -1,16 +1,17 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckMatches : MonoBehaviour, IMatchChecker
+public class CheckMatches : MonoBehaviour //IMatchChecker
 {
     [SerializeField] private SlotManager _slotManager;
+    [SerializeField] private ComboItemManager _comboItemManager;
+    [SerializeField] private GameController _gameController;
 
-
-    public void CheckGrid()
+   /* public void CheckGrid()
     {
         List<Slot> toBeBurned = CheckVerticalLines();
         if (toBeBurned.Count > 0)
         {
+            GetItemIdsFromSlots(toBeBurned);
             BurnItems(toBeBurned);
             _slotManager.RefillSlots();
             CheckGrid();
@@ -20,6 +21,7 @@ public class CheckMatches : MonoBehaviour, IMatchChecker
         List<Slot> toBeBurnedHor = CheckHorizontalLines();
         if (toBeBurnedHor.Count > 0)
         {
+            GetItemIdsFromSlots(toBeBurnedHor);
             BurnItems(toBeBurnedHor);
             _slotManager.RefillSlots();
             CheckGrid();
@@ -51,12 +53,10 @@ public class CheckMatches : MonoBehaviour, IMatchChecker
                     {
                         return toBeBurned;
                     }
-                    //ProcessBurnItems(consecutiveCount, toBeBurned);
                     consecutiveCount = 1;
                     toBeBurned.Clear();
                 }
             }
-            //ProcessBurnItems(consecutiveCount, toBeBurned);
         }
         return new List<Slot>();
     }
@@ -85,23 +85,12 @@ public class CheckMatches : MonoBehaviour, IMatchChecker
                     {
                         return toBeBurned;
                     }
-                   // ProcessBurnItems(consecutiveCount, toBeBurned);
                     consecutiveCount = 1;
                     toBeBurned.Clear();
                 }
-
             }
-            //ProcessBurnItems(consecutiveCount, toBeBurned);
         }
         return new List<Slot>();
-    }
-
-    private void ProcessBurnItems(int consecutiveCount, List<Slot> toBeBurned)
-    {
-        if (consecutiveCount >= 3)
-        {
-            BurnItems(toBeBurned);
-        }
     }
 
     private void BurnItems(List<Slot> slots)
@@ -112,4 +101,18 @@ public class CheckMatches : MonoBehaviour, IMatchChecker
             slot.item = null;
         }
     }
+
+    public void GetItemIdsFromSlots(List<Slot> slots)
+    {
+        List<int> itemIds = new List<int>();
+        foreach (Slot slot in slots)
+        {
+            if (slot != null && slot.item != null)
+            {
+                itemIds.Add(slot.item.Id);  // Додавання ID айтема до списку
+            }
+        }
+        _gameController.GetBurnedItemIds(itemIds[0]); 
+    }
+*/
 }

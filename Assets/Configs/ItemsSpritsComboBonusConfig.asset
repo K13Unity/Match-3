@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ItemsSpritsComboBonusConfig
   m_EditorClassIdentifier: 
   _itemsSprites:
-  - {fileID: -511361308, guid: 3863914294e4f1e40b007f659c038d24, type: 3}
-  - {fileID: -2089856784, guid: 3863914294e4f1e40b007f659c038d24, type: 3}
   - {fileID: -697781220, guid: 3863914294e4f1e40b007f659c038d24, type: 3}
   - {fileID: 1074839173, guid: 3863914294e4f1e40b007f659c038d24, type: 3}
+  - {fileID: -2089856784, guid: 3863914294e4f1e40b007f659c038d24, type: 3}
+  - {fileID: -511361308, guid: 3863914294e4f1e40b007f659c038d24, type: 3}
   - {fileID: -1212263764, guid: 3863914294e4f1e40b007f659c038d24, type: 3}

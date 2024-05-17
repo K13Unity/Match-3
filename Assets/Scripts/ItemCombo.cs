@@ -13,6 +13,5 @@ public class ItemCombo : MonoBehaviour
         Id = id;
         _image.sprite = sprite;
         _image.color = new Color(1, 1, 1, 1f);
-       // _rectTransform.sizeDelta = size;
     }
 }

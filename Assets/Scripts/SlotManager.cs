@@ -9,7 +9,7 @@ public class SlotManager : MonoBehaviour
 
     private IMatchChecker _matchChecker;
 
-    private Vector2 _slotSize;
+    /*private Vector2 _slotSize;
     Slot[,] slots = new Slot[GameController.slotCount, GameController.slotCount];
     public Slot[,] Slots
     {
@@ -45,7 +45,6 @@ public class SlotManager : MonoBehaviour
 
     private void CreateItem(Slot slot)
     {
-
         int id;
         bool matchFound;
         do
@@ -96,7 +95,8 @@ public class SlotManager : MonoBehaviour
 
         var targetSlot = slots[slot.yPos, x];
         slot.item.Move(targetSlot);
-        targetSlot.item.Move(slot, () => {
+        targetSlot.item.Move(slot, () =>
+        {
             _matchChecker.CheckGrid();
         });
     }
@@ -107,14 +107,14 @@ public class SlotManager : MonoBehaviour
         if (y < 0 || y >= GameController.slotCount) return;
         var targetSlot = slots[y, slot.xPos];
         slot.item.Move(targetSlot);
-        targetSlot.item.Move(slot, () => {
-           _matchChecker.CheckGrid();
+        targetSlot.item.Move(slot, () =>
+        {
+            _matchChecker.CheckGrid();
         });
     }
 
     public void RefillSlots()
     {
-        Debug.Log("RefillSlots");
         for (int x = 0; x < GameController.slotCount; x++)
         {
             int emptyCount = 0;
@@ -123,7 +123,6 @@ public class SlotManager : MonoBehaviour
                 if (slots[y, x].item == null)
                 {
                     emptyCount++;
-                    
                 }
                 else if (emptyCount > 0)
                 {
@@ -139,5 +138,5 @@ public class SlotManager : MonoBehaviour
                 AddingNewItems(slots[GameController.slotCount - 1 - y, x]);
             }
         }
-    }
+    }*/
 }

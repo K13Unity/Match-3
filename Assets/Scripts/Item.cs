@@ -21,10 +21,15 @@ public class Item : MonoBehaviour
     
     public void Move(Slot slot, Action action = null)
     {
-        transform.DOMove(slot.transform.position, 1f).SetEase(Ease.Linear).OnComplete(() =>
+        if (transform.parent != null)
+        {
+            transform.parent.GetComponent<Slot>().SetItem(null);
+        }
+        transform.DOMove(slot.transform.position, 0.1f).SetEase(Ease.Linear).OnComplete(() =>
         {
             transform.SetParent(slot.transform);
             slot.SetItem(this);
+            _text.text = $"{slot.yPos}{slot.xPos}";
             action?.Invoke();
         });
     }

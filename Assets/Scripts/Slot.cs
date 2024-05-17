@@ -10,9 +10,9 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Vector3 _startDragPoint;
     private Vector3 _endDragPoint;
 
-    public int xPos;
-    public int yPos;
     public Item item;
+    public int xPos { get; private set; }
+    public int yPos { get; private set; }
 
     public event Action <Slot, int> onHorisontal;
     public event Action <Slot, int> onVertical;

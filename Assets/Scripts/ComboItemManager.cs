@@ -6,9 +6,28 @@ public class ComboItemManager : MonoBehaviour
     [SerializeField] private ItemCombo _itemCombo;
     [SerializeField] private RectTransform _comboZone;
 
-    public void CreateComboItem()
+    private int _id = 5;
+    private int _currentNumber = 1;
+    private int _maxNumber = 2;
+
+    public void CreateComboItem(int Id)
     {
-        var id = Random.Range(0, _itemsSpritsComboBonusConfig.ItemsSprites.Count);
-        _itemCombo.Init(id, _itemsSpritsComboBonusConfig.ItemsSprites[id], _comboZone.rect.size);
+        Debug.Log(Id);
+        if (_id == Id)
+        {
+            Debug.Log("Add");
+            _currentNumber++;
+            if (_currentNumber >= _maxNumber)
+            {
+                Debug.Log("Combo");
+            }
+        }
+        else
+        {
+            Debug.Log("Reset");
+            _id = Id;
+            _itemCombo.Init(_id, _itemsSpritsComboBonusConfig.ItemsSprites[_id], _comboZone.rect.size);
+            _currentNumber = 1;
+        }
     }
 }

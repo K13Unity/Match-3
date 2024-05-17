@@ -373,7 +373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemsSpritsConfig: {fileID: 11400000, guid: 5c1db6fb865e8ba47a7a6f6113750557, type: 2}
-  _slotManager: {fileID: 0}
   _playZone: {fileID: 294194019}
   _slotPrefab: {fileID: 1811208148943761803, guid: d1f9acd90b755c74d841a1d0915e4d9a, type: 3}
   _itemPrefab: {fileID: 3211151565032282773, guid: 5f987843fafe6be4cb1f99c3786d9e6d, type: 3}
@@ -478,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.89411765}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1630,6 +1629,7 @@ MonoBehaviour:
   _slotManager: {fileID: 153434506}
   _progressZone: {fileID: 1568886935}
   _playZone: {fileID: 294194019}
+  _gameConfig: {fileID: 11400000, guid: 99513d42793656f4392a2204bea7bb64, type: 2}
   _clock: {fileID: 853186750}
   _comboProgressBar: {fileID: 1468187477}
 --- !u!4 &1144914542
@@ -2467,6 +2467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slotManager: {fileID: 153434506}
+  _comboItemManager: {fileID: 2028374098}
+  _gameController: {fileID: 1144914541}
 --- !u!4 &1774683191
 Transform:
   m_ObjectHideFlags: 0
