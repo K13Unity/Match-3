@@ -6,7 +6,6 @@ public class GameController : MonoBehaviour, ICoroutineRunner
 {
     [SerializeField] private ProgressSlotManager _progressSlotManager;
     [SerializeField] private ComboItemManager _comboItemManager;
-    [SerializeField] private CheckMatches _checkMatches;
     [SerializeField] private SlotManager _slotManager;
 
     [SerializeField] private RectTransform _progressZone;
@@ -15,7 +14,7 @@ public class GameController : MonoBehaviour, ICoroutineRunner
 
     [SerializeField] private GameConfig _gameConfig;
     public GameConfig GameConfig => _gameConfig;
-
+    public Vector2 SlotSize { get; set; }
     [SerializeField] private Clock _clock;
     [SerializeField] private ComboProgressBar _comboProgressBar;
 
@@ -45,7 +44,6 @@ public class GameController : MonoBehaviour, ICoroutineRunner
         _progressSlotSize = CalculateProgressSlotSize();
        // _slotManager.SetMatchChecker(_checkMatches);
         _progressSlotManager.CreateProgressSlots(_heightProgressCount, _progressSlotSize);
-        Debug.Log("GameController Start");
     }
 
     void Update()

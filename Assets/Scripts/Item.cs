@@ -19,19 +19,9 @@ public class Item : MonoBehaviour
 
     }
     
-    public void Move(Slot slot, Action action = null)
+    public void SetName(string name)
     {
-        if (transform.parent != null)
-        {
-            transform.parent.GetComponent<Slot>().SetItem(null);
-        }
-        transform.DOMove(slot.transform.position, 0.1f).SetEase(Ease.Linear).OnComplete(() =>
-        {
-            transform.SetParent(slot.transform);
-            slot.SetItem(this);
-            _text.text = $"{slot.yPos}{slot.xPos}";
-            action?.Invoke();
-        });
+        _text.text = name;
     }
 
     public void SetSlotPosition(Slot slot)

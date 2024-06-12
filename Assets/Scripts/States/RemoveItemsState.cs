@@ -9,13 +9,17 @@ namespace Assets.Scripts
 
         public override void OnEnter()
         {
-            
             foreach (var slot in _core.SlotsToRemoval)
             {
                 GameObject.Destroy(slot.item.gameObject);
                 slot.item = null;
-                _core.SlotsToRemoval.Clear();
+                slot.isBusy = false;
+                slot.isBurning = false;
             }
+
+            _core.SlotsToRemoval.Clear();
+            
+            new FillGapsOnFieldCommand().Execute(_core);
             ChangeState(new InputState(_core));
         }
     }

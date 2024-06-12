@@ -298,6 +298,7 @@ RectTransform:
   - {fileID: 1611117767}
   - {fileID: 137124025}
   - {fileID: 383057498}
+  - {fileID: 1576146600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1629,9 +1630,10 @@ MonoBehaviour:
   _slotManager: {fileID: 153434506}
   _progressZone: {fileID: 1568886935}
   _playZone: {fileID: 294194019}
-  _gameConfig: {fileID: 11400000, guid: 99513d42793656f4392a2204bea7bb64, type: 2}
+  _gameConfig: {fileID: 11400000, guid: 387dc9b72cc88d44ca0d5aad1c7bc66f, type: 2}
   _clock: {fileID: 853186750}
   _comboProgressBar: {fileID: 1468187477}
+  SlotsToRemoval: []
 --- !u!4 &1144914542
 Transform:
   m_ObjectHideFlags: 0
@@ -2083,6 +2085,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568886934}
   m_CullTransparentMesh: 1
+--- !u!1 &1576146598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1576146600}
+  - component: {fileID: 1576146599}
+  m_Layer: 0
+  m_Name: MovePerent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1576146599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576146598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a953c027474e8cbf2191c759d660c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1576146600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576146598}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -83.28305, y: -9.204346, z: -11.190853}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 133647760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1576594982
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,9 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public int xPos { get; private set; }
     public int yPos { get; private set; }
 
+    public bool isBusy;
+    public bool isBurning;
+
     public event Action <Slot, int> onHorisontal;
     public event Action <Slot, int> onVertical;
 

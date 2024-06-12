@@ -12,6 +12,7 @@ namespace Assets.Scripts
         public override void OnEnter()
         {
             _slotSize = CalculateSlotSize();
+            _core.SlotSize = _slotSize;
             CreateSlots(_core.GameConfig.SlotsCount, _core.GameConfig.SlotsCount, _slotSize);
             ChangeState(new CreateItemState(_core, _slotSize));
         }
@@ -37,9 +38,6 @@ namespace Assets.Scripts
                     slot.Init(col, row, new Vector2(slotSize.x, slotSize.y));
                     slot.transform.localPosition = new Vector2(xPos, yPos);
                     _core.Slots[row, col] = slot;
-                    //CreateItem(slot);
-                    //slot.onHorisontal += OnHorizontalSwap;
-                    //slot.onVertical += OnVerticalSwap;
                 }
             }
         }
